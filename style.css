@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 body {
-    margin: 0 auto;
-    max-width: 1152px;
+    margin: 0;  
+}
+.wrapper-body {
+    width: 100%;
     min-width: 380px;
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
@@ -11,10 +13,10 @@ body {
     font-size: 11px;
     background-color: #F5F5F6;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    padding: 10px 100px;
+    padding: 10px;
 }
 li a:hover {
     color: #000000;
@@ -27,11 +29,7 @@ li a {
 ul {
     list-style-type: none;
     display: flex;  
-    flex-wrap: wrap;
     overflow: hidden;
-    width: 65%;
-    justify-content: space-between;
-    padding-left: 0px;
 }
 .entrance {
     font-weight: 500;
@@ -42,10 +40,12 @@ ul {
 }
 li {
     display: inline-block;
+    margin-right: 40px;
+    box-sizing: border-box;
 }
 .wrapper {
     display: flex;
-    width: 56%;
+    max-width: 640px;
     margin: 0 auto;
     flex-wrap: wrap;
     flex-direction: column;
@@ -54,48 +54,55 @@ li {
     display: flex;
     flex-wrap: wrap;
    justify-content: space-between;
+   
 }
 .wrapper-name {
     font-weight: 700;
     font-size: 36px;
     margin: 56px 0 33px 0;
 }
+.block-big {
+    width: 259px;
+ 
+}
 .block-small {
     display: flex;
     flex-direction: row;
 }
-.block-small p {
+.block-small div {
+    flex-grow: 1;
     color: #C6C6C6;
-    width: 62px;
     border: 1px solid #E5E5E5;
     text-align: center;
     padding: 6px 0;
 }
-.block-small p:hover {
+.block-small div:hover {
     background-color: #833AE0;
 }
 .name-small {
     color: #9F9F9F;
 }
-.block-small p:first-child {
+.block-small div:first-child {
     border-radius: 3px 0 0 3px;
 }
-.block-small p:last-child {
+.block-small div:last-child {
     border-radius: 0 3px 3px 0;
 }
 .block-large {
     border: 1px solid #E5E5E5;
     border-radius: 3px;
     padding: 11px 14px 14px 14px;
+    margin-top: 15px;
 }
 .num {
     font-size: 36px;
     font-weight: 700;
-    margin: 0;
+    width: 100%;
+    border: none;
 }
 .val {
     color: #C6C6C6;
-    margin: 20px 0 0 0;
+    margin: 30px 0 0 0;
 }
 @media (max-width: 900px) {
     ul {
@@ -104,5 +111,12 @@ li {
     }
     li {
         margin: 5px;
+    }
+    .wrapper {
+        align-items: center;
+    }
+    .wrapper-blocks {
+        display: flex;
+        flex-direction: column;
     }
 }

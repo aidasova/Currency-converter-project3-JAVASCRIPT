@@ -8,65 +8,66 @@
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <header class="header">
-        <img src="images/logo.svg" class="logo" alt="логотип">
-        <ul>
-            <li><a href="#">БАНК</a></li>
-            <li><a href="#">БИЗНЕС</a></li>
-            <li><a href="#">ИНВЕСТИЦИИ</a></li>
-            <li><a href="#">СТРАХОВАНИЕ</a></li>
-            <li><a href="#">МОБАЙЛ</a></li>
-            <li><a href="#">ПУТЕШЕСТВИЯ</a></li>
-            <li><a href="#">РАЗВЛЕЧЕНИЯ</a></li>
-        </ul>
-        <div class="entrance">ВОЙТИ</div>
-    </header>
-    <main>
-        
-        <section class="wrapper">
+    <div class="wrapper-body">
+        <header class="header">
+            <img src="images/logo.svg" class="logo" alt="логотип">
+            <ul>
+                <li><a href="#">БАНК</a></li>
+                <li><a href="#">БИЗНЕС</a></li>
+                <li><a href="#">ИНВЕСТИЦИИ</a></li>
+                <li><a href="#">СТРАХОВАНИЕ</a></li>
+                <li><a href="#">МОБАЙЛ</a></li>
+                <li><a href="#">ПУТЕШЕСТВИЯ</a></li>
+                <li><a href="#">РАЗВЛЕЧЕНИЯ</a></li>
+            </ul>
+            <div class="entrance">ВОЙТИ</div>
+        </header>
+        <main>
+            
+            <section class="wrapper">
 
-            <div class="wrapper-name">Конвертер валют онлайн</div>
+                <h1 class="wrapper-name">Конвертер валют онлайн</h1>
 
-            <div class="wrapper-blocks">
+                <div class="wrapper-blocks">
 
-                <div class="block-big">
-                    <p class="name-small">У меня есть</p>
+                    <div class="block-big">
+                        <p class="name-small">У меня есть</p>
 
-                    <div class="wrapper-block">
-                        <div class="block-small">
-                            <p>RUB</p>
-                            <p>USD</p>
-                            <p>EUR</p>
-                            <p>GBP</p>
+                        <div class="wrapper-block">
+                            <div class="block-small">
+                                <div>RUB</div>
+                                <div>USD</div>
+                                <div>EUR</div>
+                                <div>GBP</div>
+                            </div>
+                            <div class="block-large">
+                                <input class="num" type="number" value="5000">
+                                <div class="val">1 RUB = 0.0132 USD</div>
+                            </div>
                         </div>
-                        <div class="block-large">
-                            <p class="num">5 000</p>
-                            <p class="val">1 RUB = 0.0132 USD</p>
+                    </div>
+                    <div class="block-big">
+                        <p class="name-small">Хочу приобрести</p>
+
+                        <div class="wrapper-block">
+                            
+                            <div class="block-small">
+                                <div>RUB</div>
+                                <div>USD</div>
+                                <div>EUR</div>
+                                <div>GBP</div>
+                            </div>
+                            <div class="block-large">
+                                <input class="num" type="number" value="67.6685">
+                                <div class="val">1 RUB = 0.0132 USD</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="block-big">
-                    <p class="name-small">Хочу приобрести</p>
 
-                    <div class="wrapper-block">
-                        
-                        <div class="block-small">
-                            <p>RUB</p>
-                            <p>USD</p>
-                            <p>EUR</p>
-                            <p>GBP</p>
-                        </div>
-                        <div class="block-large">
-                            <p class="num">67.6685</p>
-                            <p class="val">1 RUB = 0.0132 USD</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-    </main>
-
+            </section>
+        </main>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
