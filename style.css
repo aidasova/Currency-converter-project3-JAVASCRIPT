@@ -29,7 +29,6 @@ li a {
 ul {
     list-style-type: none;
     display: flex;  
-    overflow: hidden;
 }
 .entrance {
     font-weight: 500;
@@ -87,6 +86,12 @@ li {
 }
 .block-small div:last-child {
     border-radius: 0 3px 3px 0;
+}
+.sale-rub {
+    background-color: #833AE0;
+}
+.buy-usd {
+    background-color: #833AE0;
 }
 .block-large {
     border: 1px solid #E5E5E5;
