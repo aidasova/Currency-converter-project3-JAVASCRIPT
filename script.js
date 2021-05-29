@@ -4,7 +4,7 @@ class Converter {
         this.apiKey = 'a9778773f64b39c4542ec6153740a765'
         this.data = // записываем результат из getData
         this.saleRub = document.querySelector('.sale-currency')
-        let dataSelect = document.querySelector('.data-select')
+        this.dataSelect = document.querySelector('.data-select')
         //базовая валюта, итоговая валюта - найти какие валюты выбраны
     }
     // получаем данные о текущих выбранных
@@ -15,9 +15,10 @@ class Converter {
        
         saleCurrency.forEach((element) => {
             element.addEventListener('click', (event) => {
-                this.saleCurrency.classList.toggle('data-select');
-                saleCurrency = event.target;
-                let baseCurrency = saleCurrency.getAttribute('data-select')
+                element.classList.remove('data-select');
+                element.classList.add('data-select');
+                let target = event.target;
+                let baseCurrency = target.getAttribute('data-select'); //textContent
                 console.log(baseCurrency)
             });
         });
@@ -39,22 +40,5 @@ let converter = new Converter();
 converter.init();
 
 
-/*
-getCurrencyNames() {
-    let saleCurrency = document.querySelectorAll('.sale-currency')
-    console.log(saleCurrency)
-   
-    saleCurrency.forEach((element) => {
-        element.addEventListener('click', (event) => {
-            this.saleCurrency.classList.toggle('data-select');
-            saleCurrency = event.target;
-        // saleCurrency.classList.add('data-select')
-            let baseCurrency = saleCurrency.getAttribute('data-select')
-        //  let resultCurrency = saleCurrency.getAttribute('data-select')
-        // render(baseCurrency, resultCurrency)
-        // return baseCurrency
-            console.log(baseCurrency)
-        });
-    });
-}*/
+
 
