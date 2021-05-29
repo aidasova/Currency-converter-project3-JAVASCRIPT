@@ -1,43 +1,60 @@
-/*class Converter {
+class Converter {
     constructor() {
         this.uri = 'http://api.exchangeratesapi.io/v1/latest?'
         this.apiKey = 'a9778773f64b39c4542ec6153740a765'
         this.data = // записываем результат из getData
         this.saleRub = document.querySelector('.sale-currency')
-        базовая валюта, итоговая валюта - найти какие валюты выбраны
+        let dataSelect = document.querySelector('.data-select')
+        //базовая валюта, итоговая валюта - найти какие валюты выбраны
     }
     // получаем данные о текущих выбранных
-    getCurrencyNames() {
 
+    getCurrencyNames() {
+        let saleCurrency = document.querySelectorAll('.sale-currency')
+        console.log(saleCurrency)
+       
+        saleCurrency.forEach((element) => {
+            element.addEventListener('click', (event) => {
+                this.saleCurrency.classList.toggle('data-select');
+                saleCurrency = event.target;
+                let baseCurrency = saleCurrency.getAttribute('data-select')
+                console.log(baseCurrency)
+            });
+        });
     }
-    getDataFromHost(базовая валюта, итоговая валюта) {
+    getDataFromHost(/*базовая валюта, итоговая валюта*/) {
         // запрос к серверу и получить ответ и вернуть 
             }
     render() {
 
     }
     init() {
-        this.getDataFromHost(базовая валюта, итоговая валюта)
+        this.getDataFromHost(/*базовая валюта, итоговая валюта*/)
         this.render( ) //вывести на экран
         this.getCurrencyNames ()
     }
 }
 
 let converter = new Converter();
-converter.init();*/
+converter.init();
 
-let saleRub = document.querySelectorAll('.sale-currency')
-console.log(saleRub)
-flag = true;
 
-saleRub.forEach((element) => {
-    element.addEventListener('click', (event) => {
-        let color = event.target.style.backgroundColor;
-        color = (flag === true) ? 'white' : '#833AE0' ;
-        /* if (color === '#833AE0') {
-            event.target.style.backgroundColor = 'white'
-         } else {
-            event.target.style.backgroundColor = '#833AE0'
-         }*/
+/*
+getCurrencyNames() {
+    let saleCurrency = document.querySelectorAll('.sale-currency')
+    console.log(saleCurrency)
+   
+    saleCurrency.forEach((element) => {
+        element.addEventListener('click', (event) => {
+            this.saleCurrency.classList.toggle('data-select');
+            saleCurrency = event.target;
+        // saleCurrency.classList.add('data-select')
+            let baseCurrency = saleCurrency.getAttribute('data-select')
+        //  let resultCurrency = saleCurrency.getAttribute('data-select')
+        // render(baseCurrency, resultCurrency)
+        // return baseCurrency
+            console.log(baseCurrency)
         });
-});
+    });
+}*/
+
