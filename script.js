@@ -6,6 +6,7 @@
         this.saleRub = document.querySelector('.sale-currency')
         базовая валюта, итоговая валюта - найти какие валюты выбраны
     }
+    // получаем данные о текущих выбранных
     getCurrencyNames() {
 
     }
@@ -25,7 +26,7 @@
 let converter = new Converter();
 converter.init();*/
 
-saleRub = document.querySelectorAll('.sale-currency')
+let saleRub = document.querySelectorAll('.sale-currency')
 console.log(saleRub)
 flag = true;
 
