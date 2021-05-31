@@ -37,13 +37,13 @@
 
                         <div class="wrapper-block">
                             <div class="block-small">
-                                <div class="sale-currency data-select">RUB</div>
-                                <div class="sale-currency">USD</div>
-                                <div class="sale-currency">EUR</div>
-                                <div class="sale-currency">GBP</div>
+                                <div class="sale-currency" data-select="RUB">RUB</div>
+                                <div class="sale-currency" data-select="USD">USD</div>
+                                <div class="sale-currency" data-select="EUR">EUR</div>
+                                <div class="sale-currency" data-select="GBP">GBP</div>
                             </div>
                             <div class="block-large">
-                                <input class="num" type="number" placeholder="1">
+                                <input class="num" type="number" id="input" placeholder="1" value="">
                                 <div class="val">1 RUB = 0.0132 USD</div>
                             </div>
                         </div>
@@ -54,13 +54,13 @@
                         <div class="wrapper-block">
                             
                             <div class="block-small">
-                                <div class="buy-currency buy-rub">RUB</div>
-                                <div class="buy-currency buy-usd">USD</div>
-                                <div class="buy-currency buy-eur">EUR</div>
-                                <div class="buy-currency buy-gbr">GBP</div>
+                                <div class="buy-currency" data-buy="RUB">RUB</div>
+                                <div class="buy-currency" data-buy="USD">USD</div>
+                                <div class="buy-currency" data-buy="EUR">EUR</div>
+                                <div class="buy-currency" data-buy="GBP">GBP</div>
                             </div>
                             <div class="block-large">
-                                <input class="num" type="number" placeholder="67.6685">
+                                <input id="res" class="convert-result" type="number" placeholder="67.6685" value="">
                                 <div class="val">1 RUB = 0.0132 USD</div>
                             </div>
                         </div>

@@ -1,44 +1,74 @@
 class Converter {
     constructor() {
-        this.uri = 'http://api.exchangeratesapi.io/v1/latest?'
+        this.url = 'http://api.exchangeratesapi.io/v1/latest?'
         this.apiKey = 'a9778773f64b39c4542ec6153740a765'
-        this.data = // записываем результат из getData
-        this.saleRub = document.querySelector('.sale-currency')
-        this.dataSelect = document.querySelector('.data-select')
-        //базовая валюта, итоговая валюта - найти какие валюты выбраны
+        this.data = ''
     }
-    // получаем данные о текущих выбранных
 
     getCurrencyNames() {
         let saleCurrency = document.querySelectorAll('.sale-currency')
-        console.log(saleCurrency)
+        let buyCurrency = document.querySelectorAll('.buy-currency')
        
         saleCurrency.forEach((element) => {
             element.addEventListener('click', (event) => {
                 element.classList.remove('data-select');
                 element.classList.add('data-select');
                 let target = event.target;
-                let baseCurrency = target.getAttribute('data-select'); //textContent
-                console.log(baseCurrency)
+                let baseChoise = target.getAttribute('data-select'); 
+                console.log(baseChoise)
+            baseChoise = ''
             });
         });
+        buyCurrency.forEach((element) => {
+            element.addEventListener('click', (event) => {
+                element.classList.remove('data-buy');
+                element.classList.add('data-buy');
+                let target = event.target;
+                let symbol = target.getAttribute('data-buy'); 
+                console.log(symbol)
+            symbol = ''
+            });
+        });
+        this.getDataFromHost(baseChoise, symbol)
     }
-    getDataFromHost(/*базовая валюта, итоговая валюта*/) {
+    
+    getDataFromHost(baseChoise = 'EUR', symbol = 'GBP') {
+        if(baseChoise === symbol) {
+            this.inputResult.textContent = this.inputSale.value // если выбраны одинаковые валюты, вписываем также в результат
+            console.log(this.inputResult)
+        }
         // запрос к серверу и получить ответ и вернуть 
-            }
-    render() {
-
+        fetch(this.url + `access_key=${this.apiKey}&base=${baseChoise}&symbols=${symbol}`)
+            .then((response) => response.json())
+            .then(data => {
+                console.log(data)
+                this.data = data.rates[symbol]
+                console.log(this.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
+   
+    render() {  
+        let input = document.querySelector('#input')
+        let inputResult = document.querySelector('#res')
+        console.log(input)
+        console.log(inputResult)
+
+        input.addEventListener('input', () => {
+            inputResult.value = (parseFloat(input.value) * this.data).toFixed(2)
+        })
+        
+    }
+
     init() {
-        this.getDataFromHost(/*базовая валюта, итоговая валюта*/)
-        this.render( ) //вывести на экран
+        this.getDataFromHost()
+        this.render() //вывести на экран
         this.getCurrencyNames ()
     }
 }
 
 let converter = new Converter();
 converter.init();
-
-
-
 
