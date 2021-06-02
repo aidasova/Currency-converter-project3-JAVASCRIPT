@@ -10,7 +10,11 @@ class Converter {
         this.saleCourse = document.querySelectorAll('.val')
     }
 
-   setEventLIstenersForCurrencyButtons() {      
+    setEventListenersForInputs() {
+        
+    }
+
+    setEventLIstenersForCurrencyButtons() {      
         let saleCurrency = document.querySelectorAll('.sale-currency') //все выборы из ввода валюта
         let buyCurrency = document.querySelectorAll('.buy-currency')     //все выборы из вывода  валюта    
         saleCurrency.forEach((element) => {
@@ -22,7 +26,6 @@ class Converter {
 
                this.getCurrencyNames()
                this.getDataFromHost();
-               this.render()
             });
         });
         buyCurrency.forEach((el) => {
@@ -34,14 +37,13 @@ class Converter {
 
                 this.getCurrencyNames()
                 this.getDataFromHost();
-                this.render()
             })
          }); 
     }
 
     getCurrencyNames() { 
-        this.base = this.sale.textContent
-        this.symbol = this.buy.textContent
+        this.base = this.sale.getAttribute('data-select');
+        this.symbol = this.buy.getAttribute('data-buy');
         console.log(this.base)
         console.log(this.symbol) 
         this.getDataFromHost();
@@ -52,6 +54,7 @@ class Converter {
             this.inputResult.textContent = this.input.value
             console.log(this.inputResult)
         }
+        console.log(this.url + `access_key=${this.apiKey}&base=${this.base}&symbols=${this.symbol}`);
         fetch(this.url + `access_key=${this.apiKey}&base=${this.base}&symbols=${this.symbol}`)
             .then((response) => response.json())
             .then(data => {
@@ -63,11 +66,13 @@ class Converter {
                 console.log(error)
             })
     }
-   
+    /**
+     * Вывод информации на страницу
+     */
     render() {  
-        this.input.addEventListener('input', () => {
-        this.inputResult.value = (parseFloat(this.input.value) * this.data).toFixed(2)
-        })
+        // this.input.addEventListener('input', () => {
+            this.inputResult.value = (parseFloat(this.input.value) * this.data).toFixed(2)
+        // })
     }
     getCourceToday () {
         this.saleCourse.textContent = `1 ${this.base} = ${this.data} ${this.symbol}`
