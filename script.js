@@ -7,11 +7,17 @@ class Converter {
         this.inputResult = document.querySelector('#res');
         this.sale = document.querySelector('.data-sale') //выбранный элемент ввода валюта 1
         this.buy = document.querySelector('.data-buy')// выбр элемент вывода валюта 1
-        this.saleCourse = document.querySelectorAll('.val')
+        this.saleCourse = document.querySelector('.val-base')
+        this.buyCourse = document.querySelector('.val-get')
     }
 
     setEventListenersForInputs() {
-        
+        this.saleChange = document.querySelector('[name="sale"]') 
+        this.buyChange = document.querySelector('[name="buy"]') 
+        this.saleChange.addEventListener('input', () => {
+            this.saleChange.value
+            this.getDataFromHost() 
+        })
     }
 
     setEventLIstenersForCurrencyButtons() {      
@@ -59,8 +65,10 @@ class Converter {
             .then((response) => response.json())
             .then(data => {
                 this.data = data.rates[this.symbol]
+                this.dataBuy = 1 / this.data
                // console.log(this.data)
-                this.render()
+               this.getCourceToday ()
+               this.render()
             })
             .catch(error => {
                 console.log(error)
@@ -70,15 +78,15 @@ class Converter {
      * Вывод информации на страницу
      */
     render() {  
-        // this.input.addEventListener('input', () => {
-            this.inputResult.value = (parseFloat(this.input.value) * this.data).toFixed(2)
-        // })
+        this.inputResult.value = (parseFloat(this.input.value) * this.data).toFixed(2)
     }
     getCourceToday () {
-        this.saleCourse.textContent = `1 ${this.base} = ${this.data} ${this.symbol}`
+        this.saleCourse.textContent = `1 ${this.sale.textContent} = ${this.data} ${this.buy.textContent}`
+        this.buyCourse.textContent = `1 ${this.buy.textContent} = ${this.dataBuy} ${this.sale.textContent}`
     }
     init() {
         this.setEventLIstenersForCurrencyButtons()
+        this.setEventListenersForInputs()
         this.getCurrencyNames()
         this.getDataFromHost();
         this.getCourceToday()
