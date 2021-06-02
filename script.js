@@ -5,63 +5,59 @@ class Converter {
         this.data = '';
         this.input = document.querySelector('#input');
         this.inputResult = document.querySelector('#res');
+        this.sale = document.querySelector('.data-sale') //выбранный элемент ввода валюта 1
+        this.buy = document.querySelector('.data-buy')// выбр элемент вывода валюта 1
+        this.saleCourse = document.querySelectorAll('.val')
     }
 
-    setEventLIstenersForCurrencyButtons() {
-        let saleCurrency = document.querySelectorAll('.sale-currency')
-        let buyCurrency = document.querySelectorAll('.buy-currency')
-       
+   setEventLIstenersForCurrencyButtons() {      
+        let saleCurrency = document.querySelectorAll('.sale-currency') //все выборы из ввода валюта
+        let buyCurrency = document.querySelectorAll('.buy-currency')     //все выборы из вывода  валюта    
         saleCurrency.forEach((element) => {
             element.addEventListener('click', (event) => {
-                // element.classList.remove('data-select');
-                // element.classList.add('data-select');
-                // let target = event.target;
-                // this.baseChoise = target.getAttribute('data-select'); 
-                // console.log(this.baseChoise)
-                // this.baseChoise = ''
+                this.sale.classList.remove('data-sale');
+                this.sale = event.target
+                this.sale.classList.add('data-sale');
+                console.log(this.sale)
 
-                // 1. Удалить класс data-select у элемента, у которого он установлен 
-                this.refreshActiveClass(saleCurrency, element);
-                // 2. Получить значение из элементов sale-currency и buy-currencyчёч, у которого установлен data-select
-                this.getCurrencyNames();
-                // 3. СДелать запрос на сервер
+               this.getCurrencyNames()
+               this.getDataFromHost();
+               this.render()
+            });
+        });
+        buyCurrency.forEach((el) => {
+            el.addEventListener('click', (event) => {
+                this.buy.classList.remove('data-buy');
+                this.buy = event.target
+                this.buy.classList.add('data-buy');
+               // console.log(this.buy)
+
+                this.getCurrencyNames()
                 this.getDataFromHost();
-                // 4. Срендерить информацию на экран
-                this.render();
-            });
-        });
-        buyCurrency.forEach((element) => {
-            element.addEventListener('click', (event) => {
-                // element.classList.remove('data-buy');
-                // element.classList.add('data-buy');
-                // let target = event.target;
-                // this.symbol = target.getAttribute('data-buy'); 
-                // console.log(this.symbol)
-                // this.symbol = ''
-            });
-        });
+                this.render()
+            })
+         }); 
     }
 
-    refreshActiveClass(groupElements, element) {
-
-    }
-
-    getCurrencyNames() {
-        
+    getCurrencyNames() { 
+        this.base = this.sale.textContent
+        this.symbol = this.buy.textContent
+        console.log(this.base)
+        console.log(this.symbol) 
+        this.getDataFromHost();
     }
     
     getDataFromHost() {
-        if(this.baseChoise === this.symbol) {
-            this.input.textContent = this.inputResult.value // если выбраны одинаковые валюты, вписываем также в результат
+        if(this.base === this.symbol) {
+            this.inputResult.textContent = this.input.value
             console.log(this.inputResult)
         }
-        // запрос к серверу и получить ответ и вернуть 
-        fetch(this.url + `access_key=${this.apiKey}&base=${this.baseChoise}&symbols=${this.symbol}`)
+        fetch(this.url + `access_key=${this.apiKey}&base=${this.base}&symbols=${this.symbol}`)
             .then((response) => response.json())
             .then(data => {
-                console.log(data)
-                this.data = data.rates[symbol]
-                console.log(this.data)
+                this.data = data.rates[this.symbol]
+               // console.log(this.data)
+                this.render()
             })
             .catch(error => {
                 console.log(error)
@@ -69,18 +65,24 @@ class Converter {
     }
    
     render() {  
-        input.addEventListener('input', () => {
-            inputResult.value = (parseFloat(input.value) * this.data).toFixed(2)
+        this.input.addEventListener('input', () => {
+        this.inputResult.value = (parseFloat(this.input.value) * this.data).toFixed(2)
         })
     }
-
+    getCourceToday () {
+        this.saleCourse.textContent = `1 ${this.base} = ${this.data} ${this.symbol}`
+    }
     init() {
+        this.setEventLIstenersForCurrencyButtons()
         this.getCurrencyNames()
-        this.getDataFromHost()
-        this.render() //вывести на экран
+        this.getDataFromHost();
+        this.getCourceToday()
     }
 }
 
 let converter = new Converter();
 converter.init();
+
+    
+
 

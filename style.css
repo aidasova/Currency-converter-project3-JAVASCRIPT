@@ -91,10 +91,10 @@ li {
 .block-small div:last-child {
     border-radius: 0 3px 3px 0;
 }
-.data-select {
+.data-buy {
     background-color: #833AE0;
 }
-.data-buy {
+.data-sale {
     background-color: #833AE0;
 }
 .block-large {
