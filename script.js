@@ -37,7 +37,6 @@ class Converter {
             this.getDataFromHost() 
         }
     }
-
     setEventLIstenersForCurrencyButtons() {      
         let saleCurrency = document.querySelectorAll('.sale-currency') //все выборы из ввода валюта
         let buyCurrency = document.querySelectorAll('.buy-currency')     //все выборы из вывода  валюта    
@@ -90,6 +89,11 @@ class Converter {
             })
             .catch(error => {
                 console.log(error)
+               // alert('Что-то пошло не так')
+                let elem = document.createElement('span')
+                let b = document.querySelector('.wrapper')
+                elem.textContent = 'Что-то пошло не так'
+                b.append(elem)
             })
         }
     }
@@ -100,7 +104,7 @@ class Converter {
         if (this.converse === true) {
             this.inputResult.value = (parseFloat(this.input.value) * this.data).toFixed(2)
         } else{
-            this.input.value = (parseFloat(this.inputResult.value) * this.data).toFixed(2)
+            this.input.value = (parseFloat(this.inputResult.value) / this.data).toFixed(2)
         }
     }
     getCourceToday () {
