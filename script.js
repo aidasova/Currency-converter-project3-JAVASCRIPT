@@ -9,6 +9,7 @@ class Converter {
         this.buy = document.querySelector('.data-buy')// выбр элемент вывода валюта 1
         this.saleCourse = document.querySelector('.val-base')
         this.buyCourse = document.querySelector('.val-get')
+        this.converse = true
     }
 
     setEventListenersForInputs() {
@@ -16,8 +17,25 @@ class Converter {
         this.buyChange = document.querySelector('[name="buy"]') 
         this.saleChange.addEventListener('input', () => {
             this.saleChange.value
+            console.log(this.saleChange)
             this.getDataFromHost() 
+            this.converse = true
         })
+        this.buyChange.addEventListener('input', () => {
+            this.buyChange.value
+            console.log(this.saleChange)
+            this.getDataFromHost() 
+            this.converse = false
+        })
+    }
+    getConverseCourse() {
+        if (this.converse === true) {
+            this.setEventListenersForInputs()
+        } else {
+            this.base = this.buy.getAttribute('data-buy');
+            this.symbol = this.sale.getAttribute('data-select'); 
+            this.getDataFromHost() 
+        }
     }
 
     setEventLIstenersForCurrencyButtons() {      
@@ -28,7 +46,7 @@ class Converter {
                 this.sale.classList.remove('data-sale');
                 this.sale = event.target
                 this.sale.classList.add('data-sale');
-                console.log(this.sale)
+               // console.log(this.sale) // html
 
                this.getCurrencyNames()
                this.getDataFromHost();
@@ -39,7 +57,7 @@ class Converter {
                 this.buy.classList.remove('data-buy');
                 this.buy = event.target
                 this.buy.classList.add('data-buy');
-               // console.log(this.buy)
+                console.log(this.buy)
 
                 this.getCurrencyNames()
                 this.getDataFromHost();
@@ -48,7 +66,7 @@ class Converter {
     }
 
     getCurrencyNames() { 
-        this.base = this.sale.getAttribute('data-select');
+        this.base = this.sale.getAttribute('data-select'); //выбор или по умолчанию
         this.symbol = this.buy.getAttribute('data-buy');
         console.log(this.base)
         console.log(this.symbol) 
@@ -57,14 +75,14 @@ class Converter {
     
     getDataFromHost() {
         if(this.base === this.symbol) {
-            this.inputResult.textContent = this.input.value
+            this.inputResult.value = this.input.value
             console.log(this.inputResult)
-        }
-        console.log(this.url + `access_key=${this.apiKey}&base=${this.base}&symbols=${this.symbol}`);
+        } else {
+       // console.log(this.url + `access_key=${this.apiKey}&base=${this.base}&symbols=${this.symbol}`);
         fetch(this.url + `access_key=${this.apiKey}&base=${this.base}&symbols=${this.symbol}`)
             .then((response) => response.json())
             .then(data => {
-                this.data = data.rates[this.symbol]
+                this.data = data.rates[this.symbol] //конвертация
                 this.dataBuy = 1 / this.data
                // console.log(this.data)
                this.getCourceToday ()
@@ -73,16 +91,21 @@ class Converter {
             .catch(error => {
                 console.log(error)
             })
+        }
     }
     /**
      * Вывод информации на страницу
      */
     render() {  
-        this.inputResult.value = (parseFloat(this.input.value) * this.data).toFixed(2)
+        if (this.converse === true) {
+            this.inputResult.value = (parseFloat(this.input.value) * this.data).toFixed(2)
+        } else{
+            this.input.value = (parseFloat(this.inputResult.value) * this.data).toFixed(2)
+        }
     }
     getCourceToday () {
-        this.saleCourse.textContent = `1 ${this.sale.textContent} = ${this.data} ${this.buy.textContent}`
-        this.buyCourse.textContent = `1 ${this.buy.textContent} = ${this.dataBuy} ${this.sale.textContent}`
+        this.saleCourse.textContent = `1 ${this.sale.textContent} = ${this.data.toFixed(4)} ${this.buy.textContent}`
+        this.buyCourse.textContent = `1 ${this.buy.textContent} = ${this.dataBuy.toFixed(4)} ${this.sale.textContent}`
     }
     init() {
         this.setEventLIstenersForCurrencyButtons()
