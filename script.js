@@ -69,7 +69,7 @@ class Converter {
         this.symbol = this.buy.getAttribute('data-buy');
         console.log(this.base)
         console.log(this.symbol) 
-        this.getDataFromHost();
+       // this.getDataFromHost();
     }
     
     getDataFromHost() {
@@ -91,9 +91,11 @@ class Converter {
                 console.log(error)
                // alert('Что-то пошло не так')
                 let elem = document.createElement('span')
-                let b = document.querySelector('.wrapper')
+                elem.classList.add('crash')
+                let bodyMain = document.querySelector('.wrapper')
                 elem.textContent = 'Что-то пошло не так'
-                b.append(elem)
+                bodyMain.append(elem)
+                elem.classList.remove('crash')
             })
         }
     }
